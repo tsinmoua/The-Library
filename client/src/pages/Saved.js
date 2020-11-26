@@ -1,14 +1,15 @@
 import React from "react";
 import Navbar from "../components/Navbar"
 
-function Home() {
+function Saved() {
     return (
       <>
         <Navbar />
+        Saved
       </>
     )
   }
   
   
-  export default Home;
+  export default Saved;
   

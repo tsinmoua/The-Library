@@ -1,5 +1,5 @@
 import axios from "axios";
-const APIKEY = process.env.REACT_APP_GOOGLE_API_KEY
+// const APIKEY = process.env.REACT_APP_GOOGLE_API_KEY
 
 export default {
   search: function(query) {

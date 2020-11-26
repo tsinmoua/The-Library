@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+import books from "../../assets/images/books.png"
 
 function NavBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-dark container fixed-top">
-            <Link className="navbar-brand" to="/">The Library</Link>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="navbar-brand">
+                <img src={books} width="30" height="30" className="d-inline-block align-top" alt="Books" loading="lazy" />
+                    The Library
+            </div>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
