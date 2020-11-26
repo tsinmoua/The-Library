@@ -35,20 +35,27 @@ function Search() {
     setSearch("");
   };
 
-  function handleButtonClick(event){
-    event.preventDefault()
+  function handleButtonClick(event) {
+    // event.preventDefault()
     event.stopPropagation()
-    
+
     const btnName = event.target.getAttribute("name")
 
-    if (btnName === "view") {
-      console.log("clicked view");
-    } else if (btnName === "save") {
+    if (btnName === "save") {
       console.log("clicked save");
+      API.saveBook({
+        src: results.src,
+        alt: results.title,
+        title: results.title,
+        authors: results.authors,
+        description: results.description,
+        id: results.id,
+        link: results.infoLink
+      })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     }
-
   }
-
 
   return (
     <>
@@ -69,29 +76,30 @@ function Search() {
               value={search}
             />
             <FormBtn
-              // disabled={!(formObject.title)}
               onClick={handleFormSubmit}
             >
-              Submit Book
+              Submit
           </FormBtn>
           </form>
         </Container>
       </div>
 
       <Container>
-        <h1>Results</h1>
+        <h1>{results.length > 0 ? "Results" : ""}</h1>
+        {console.log(results)}
         {
           results.map((books, index) => {
-            console.log(results);
-            return(
-              <Card 
-              key={index}
-              src={books.volumeInfo.imageLinks.smallThumbnail}
-              alt={books.volumeInfo.title}
-              title={books.volumeInfo.title}
-              authors={books.volumeInfo.authors}
-              description={books.volumeInfo.description}
-              onClick={handleButtonClick}
+            return (
+              <Card
+                key={index}
+                src={books.volumeInfo.imageLinks.smallThumbnail}
+                alt={books.volumeInfo.title}
+                title={books.volumeInfo.title}
+                authors={books.volumeInfo.authors}
+                description={books.volumeInfo.description}
+                id={books.id}
+                link={books.volumeInfo.infoLink}
+                onClick={handleButtonClick}
               />
             )
           })

@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 function Card(props) {
     return (
@@ -15,8 +16,10 @@ function Card(props) {
                         <div className="card-body">
                             <h5 className="card-title">{props.title}
                                 <span>
-                                    <button name="view" onClick={props.onClick}>View</button>
-                                    <button name="save" onClick={props.onClick}>Save</button>
+                                    <a href={props.link} target="_blank">
+                                        <button type="button" className="btn btn-primary" name="view">View</button>
+                                    </a>
+                                    <button type="button" className="btn btn-secondary" name="save" onClick={props.onClick}>Save</button>
                                 </span>
                             </h5>
                             <h6 className="card-title">By: {props.authors}</h6>
