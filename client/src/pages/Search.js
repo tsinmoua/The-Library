@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 import Jumbotron from "../components/Jumbotron"
 import Container from "../components/Container"
 import { Input, FormBtn } from "../components/Form"
+import Card from "../components/Card"
 import API from "../utils/API"
 
 function Search() {
@@ -13,8 +14,8 @@ function Search() {
   function searchBooks(query) {
     API.search(query)
       .then(res => {
-        console.log(res);
-        console.log(res.data.items);
+        // console.log(res);
+        // console.log(res.data.items);
         setResults(res.data.items)
       }
       )
@@ -34,6 +35,20 @@ function Search() {
     setSearch("");
   };
 
+  function handleButtonClick(event){
+    event.preventDefault()
+    event.stopPropagation()
+    
+    const btnName = event.target.getAttribute("name")
+
+    if (btnName === "view") {
+      console.log("clicked view");
+    } else if (btnName === "save") {
+      console.log("clicked save");
+    }
+
+  }
+
 
   return (
     <>
@@ -44,33 +59,43 @@ function Search() {
         heading2="Search for and Save Books of Interest"
       />
 
-      <Container fluid="true">
-        <h1>Book Search</h1>
-        <form>
-          <Input
-            onChange={handleInputChange}
-            name="title"
-            value={search}
-          />
-          <FormBtn
-            // disabled={!(formObject.title)}
-            onClick={handleFormSubmit}
-          >
-            Submit Book
+      <div className="row">
+        <Container>
+          <h1>Book Search</h1>
+          <form>
+            <Input
+              onChange={handleInputChange}
+              name="title"
+              value={search}
+            />
+            <FormBtn
+              // disabled={!(formObject.title)}
+              onClick={handleFormSubmit}
+            >
+              Submit Book
           </FormBtn>
-        </form>
-      </Container>
+          </form>
+        </Container>
+      </div>
 
-      <Container fluid="true">
-        {/* {
+      <Container>
+        <h1>Results</h1>
+        {
           results.map((books, index) => {
+            console.log(results);
             return(
-              <div className="card" key={index}>
-                {books.volumeInfo.title}
-              </div>
+              <Card 
+              key={index}
+              src={books.volumeInfo.imageLinks.smallThumbnail}
+              alt={books.volumeInfo.title}
+              title={books.volumeInfo.title}
+              authors={books.volumeInfo.authors}
+              description={books.volumeInfo.description}
+              onClick={handleButtonClick}
+              />
             )
           })
-        } */}
+        }
       </Container>
     </>
   )

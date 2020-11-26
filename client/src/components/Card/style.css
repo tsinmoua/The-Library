@@ -1,0 +1,22 @@
+.card img {
+    width: 200px;
+    padding: 10px;
+}
+
+.card p {
+    padding: 10px;
+    text-align: left;
+}
+
+.card h5, .card h6 {
+    text-align: left;
+}
+
+.card span {
+    float: right;
+    padding: 10px;
+}
+
+.card button {
+    margin: 5px;
+}
