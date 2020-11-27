@@ -6,6 +6,8 @@
 .card p {
     padding: 10px;
     text-align: left;
+    display: block;
+    float: left;
 }
 
 .card h5, .card h6 {

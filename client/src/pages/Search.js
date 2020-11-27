@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar"
 import Jumbotron from "../components/Jumbotron"
 import Container from "../components/Container"
@@ -17,8 +17,7 @@ function Search() {
         // console.log(res);
         // console.log(res.data.items);
         setResults(res.data.items)
-      }
-      )
+      })
       .catch(err => console.log(err));
   };
 
@@ -39,22 +38,23 @@ function Search() {
     // event.preventDefault()
     event.stopPropagation()
 
-    const btnName = event.target.getAttribute("name")
+    const title = event.currentTarget.getAttribute("title")
+    const authors = event.currentTarget.getAttribute("authors")
+    const description = event.currentTarget.getAttribute("description")
+    const src = event.currentTarget.getAttribute("src")
+    const link = event.currentTarget.getAttribute("link")
 
-    if (btnName === "save") {
-      console.log("clicked save");
-      API.saveBook({
-        src: results.src,
-        alt: results.title,
-        title: results.title,
-        authors: results.authors,
-        description: results.description,
-        id: results.id,
-        link: results.infoLink
-      })
+    if (event.currentTarget.name === "save") {
+      // console.log("clicked save");
+      saveBook({ title, authors, description, image:src, link });
+    }
+  }
+
+  function saveBook(object) {
+    // console.log("Save book");
+    API.saveBook(object)
         .then(res => console.log(res))
         .catch(err => console.log(err));
-    }
   }
 
   return (
@@ -70,23 +70,16 @@ function Search() {
         <Container>
           <h1>Book Search</h1>
           <form>
-            <Input
-              onChange={handleInputChange}
-              name="title"
-              value={search}
-            />
-            <FormBtn
-              onClick={handleFormSubmit}
-            >
+            <Input onChange={handleInputChange} name="title" value={search} />
+            <FormBtn onClick={handleFormSubmit}>
               Submit
-          </FormBtn>
+            </FormBtn>
           </form>
         </Container>
       </div>
 
       <Container>
         <h1>{results.length > 0 ? "Results" : ""}</h1>
-        {console.log(results)}
         {
           results.map((books, index) => {
             return (
@@ -95,10 +88,14 @@ function Search() {
                 src={books.volumeInfo.imageLinks.smallThumbnail}
                 alt={books.volumeInfo.title}
                 title={books.volumeInfo.title}
-                authors={books.volumeInfo.authors}
-                description={books.volumeInfo.description}
+                authors={!books.volumeInfo.authors ?
+                  "No author available" : books.volumeInfo.authors}
+                description={!books.volumeInfo.description ?
+                  "No description available" : books.volumeInfo.description}
                 id={books.id}
                 link={books.volumeInfo.infoLink}
+                buttonvalue1="View"
+                buttonvalue2="Save"
                 onClick={handleButtonClick}
               />
             )
