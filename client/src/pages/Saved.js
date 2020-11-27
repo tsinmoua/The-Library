@@ -4,6 +4,8 @@ import Jumbotron from "../components/Jumbotron"
 import Container from "../components/Container"
 import Card from "../components/Card"
 import API from "../utils/API"
+import { DangerAlert } from "../components/Alert"
+import $ from "jquery"
 
 function Saved() {
 
@@ -23,18 +25,29 @@ function Saved() {
     event.stopPropagation();
 
     const deleteID = event.currentTarget.getAttribute("id")
+    const alertnumber = event.currentTarget.getAttribute("alertnumber")
 
     if (event.currentTarget.name === "delete") {
       // console.log("clicked delete");
-      deleteBook(deleteID)
+      deleteBook(deleteID, alertnumber)
     }
   }
 
-  function deleteBook(id) {
+  function deleteBook(id, index) {
     API.deleteBook(id)
       .then(res => {
-        console.log(res);
-        loadSavedBooks()
+        $(`#danger-alert${index}`).show()
+        $(`#danger-alert${index}`)
+          .fadeTo(2500, 500)
+          .slideUp(500, function () {
+            $(`#danger-alert${index}`).slideUp(500);
+          });
+
+        setTimeout(function () {
+          loadSavedBooks()
+        }, 3000)
+
+        // console.log(res);
       })
       .catch(err => console.log(err));
   }
@@ -55,20 +68,26 @@ function Saved() {
         <h3>{books.length > 0 ? "" : "Search for a book and click the 'Save' button for books to appear here."}</h3>
         {books.map((books, index) => {
           return (
-            <Card
-              key={index}
-              src={books.image}
-              alt={books.title}
-              title={books.title}
-              authors={books.authors}
-              description={books.description}
-              link={books.link}
-              buttonvalue1="View"
-              buttonvalue2="Delete"
-              buttonname2="delete"
-              id={books._id}
-              onClick={handleButtonClick}
-            />
+            <div key={index}>
+              <DangerAlert
+                alertnumber={index}
+                title={books.title}
+              />
+              <Card
+                src={books.image}
+                alt={books.title}
+                title={books.title}
+                authors={books.authors}
+                description={books.description}
+                link={books.link}
+                buttonvalue1="View"
+                buttonvalue2="Delete"
+                buttonname2="delete"
+                id={books._id}
+                onClick={handleButtonClick}
+                alertnumber={index}
+              />
+            </div>
           )
         })}
       </Container>
