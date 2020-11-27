@@ -46,15 +46,15 @@ function Search() {
 
     if (event.currentTarget.name === "save") {
       // console.log("clicked save");
-      saveBook({ title, authors, description, image:src, link });
+      saveBook({ title, authors, description, image: src, link });
     }
   }
 
   function saveBook(object) {
     // console.log("Save book");
     API.saveBook(object)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   }
 
   return (
@@ -66,17 +66,15 @@ function Search() {
         heading2="Search for and Save Books of Interest"
       />
 
-      <div className="row">
-        <Container>
-          <h1>Book Search</h1>
-          <form>
-            <Input onChange={handleInputChange} name="title" value={search} />
-            <FormBtn onClick={handleFormSubmit}>
-              Submit
+      <Container>
+        <h1>Book Search</h1>
+        <form>
+          <Input onChange={handleInputChange} name="title" value={search} />
+          <FormBtn onClick={handleFormSubmit}>
+            Submit
             </FormBtn>
-          </form>
-        </Container>
-      </div>
+        </form>
+      </Container>
 
       <Container>
         <h1>{results.length > 0 ? "Results" : ""}</h1>
@@ -96,6 +94,7 @@ function Search() {
                 link={books.volumeInfo.infoLink}
                 buttonvalue1="View"
                 buttonvalue2="Save"
+                buttonname2="save"
                 onClick={handleButtonClick}
               />
             )

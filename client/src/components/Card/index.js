@@ -24,7 +24,7 @@ function Card(props) {
                                     </a>
                                     <button type="button"
                                         className="btn btn-secondary"
-                                        name="save" onClick={props.onClick}
+                                        name={props.buttonname2} onClick={props.onClick}
                                         {...props}>{props.buttonvalue2}
                                     </button>
                                 </span>
