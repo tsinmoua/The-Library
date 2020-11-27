@@ -28,14 +28,14 @@ function Saved() {
       // console.log("clicked delete");
       deleteBook(deleteID)
     }
-
   }
 
   function deleteBook(id) {
     API.deleteBook(id)
       .then(res => {
         console.log(res);
-        loadSavedBooks()})
+        loadSavedBooks()
+      })
       .catch(err => console.log(err));
   }
 
@@ -50,29 +50,27 @@ function Saved() {
 
       <Container>
         <h1>Saved Books</h1>
-        <br/>
+        <br />
         <h3>{books.length > 0 ? "" : "You have no saved books."}</h3>
         <h3>{books.length > 0 ? "" : "Search for a book and click the 'Save' button for books to appear here."}</h3>
-        {
-          books.map((books, index) => {
-            return (
-              <Card
-                key={index}
-                src={books.image}
-                alt={books.title}
-                title={books.title}
-                authors={books.authors}
-                description={books.description}
-                link={books.link}
-                buttonvalue1="View"
-                buttonvalue2="Delete"
-                buttonname2="delete"
-                id={books._id}
-                onClick={handleButtonClick}
-              />
-            )
-          })
-        }
+        {books.map((books, index) => {
+          return (
+            <Card
+              key={index}
+              src={books.image}
+              alt={books.title}
+              title={books.title}
+              authors={books.authors}
+              description={books.description}
+              link={books.link}
+              buttonvalue1="View"
+              buttonvalue2="Delete"
+              buttonname2="delete"
+              id={books._id}
+              onClick={handleButtonClick}
+            />
+          )
+        })}
       </Container>
     </>
   )

@@ -78,28 +78,25 @@ function Search() {
 
       <Container>
         <h1>{results.length > 0 ? "Results" : ""}</h1>
-        {
-          results.map((books, index) => {
-            return (
-              <Card
-                key={index}
-                src={books.volumeInfo.imageLinks.smallThumbnail}
-                alt={books.volumeInfo.title}
-                title={books.volumeInfo.title}
-                authors={!books.volumeInfo.authors ?
-                  "No author available" : books.volumeInfo.authors}
-                description={!books.volumeInfo.description ?
-                  "No description available" : books.volumeInfo.description}
-                id={books.id}
-                link={books.volumeInfo.infoLink}
-                buttonvalue1="View"
-                buttonvalue2="Save"
-                buttonname2="save"
-                onClick={handleButtonClick}
-              />
-            )
-          })
-        }
+        {results.map((books, index) => {
+          return (
+            <Card
+              key={index}
+              src={books.volumeInfo.imageLinks.smallThumbnail}
+              alt={books.volumeInfo.title}
+              title={books.volumeInfo.title}
+              authors={!books.volumeInfo.authors ?
+                "No author available" : books.volumeInfo.authors}
+              description={!books.volumeInfo.description ?
+                "No description available" : books.volumeInfo.description}
+              link={books.volumeInfo.infoLink}
+              buttonvalue1="View"
+              buttonvalue2="Save"
+              buttonname2="save"
+              onClick={handleButtonClick}
+            />
+          )
+        })}
       </Container>
     </>
   )
