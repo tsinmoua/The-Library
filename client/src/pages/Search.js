@@ -17,7 +17,7 @@ function Search() {
     API.search(query)
       .then(res => {
         // console.log(res);
-        console.log(res.data.items);
+        // console.log(res.data.items);
         setResults(res.data.items)
       })
       .catch(err => console.log(err));
@@ -95,7 +95,7 @@ function Search() {
                 title={books.volumeInfo.title}
               />
               <Card
-                src={books.volumeInfo.readingModes.image === true ? 
+                src={books.volumeInfo.imageLinks ? 
                 books.volumeInfo.imageLinks.smallThumbnail : "https://via.placeholder.com/150?text=No Image"}
                 alt={books.volumeInfo.title}
                 title={books.volumeInfo.title}
