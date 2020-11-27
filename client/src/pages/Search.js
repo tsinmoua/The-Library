@@ -4,7 +4,9 @@ import Jumbotron from "../components/Jumbotron"
 import Container from "../components/Container"
 import { Input, FormBtn } from "../components/Form"
 import Card from "../components/Card"
+import { SuccessAlert } from "../components/Alert"
 import API from "../utils/API"
+import $ from "jquery"
 
 function Search() {
 
@@ -43,18 +45,22 @@ function Search() {
     const description = event.currentTarget.getAttribute("description")
     const src = event.currentTarget.getAttribute("src")
     const link = event.currentTarget.getAttribute("link")
+    const alertnumber = event.currentTarget.getAttribute("alertnumber")
 
     if (event.currentTarget.name === "save") {
-      // console.log("clicked save");
-      saveBook({ title, authors, description, image: src, link });
-    }
-  }
-
-  function saveBook(object) {
-    // console.log("Save book");
-    API.saveBook(object)
-      .then(res => console.log(res))
+      // console.log("clicked save");      
+      API.saveBook({ title, authors, description, image: src, link })
+      .then(res => {
+        $(`#success-alert${alertnumber}`).show()
+        $(`#success-alert${alertnumber}`)
+          .fadeTo(3000, 500)
+          .slideUp(500, function () {
+            $(`#success-alert${alertnumber}`).slideUp(500);
+          });
+        // console.log(res)
+      })
       .catch(err => console.log(err));
+    }
   }
 
   return (
@@ -80,21 +86,27 @@ function Search() {
         <h1>{results.length > 0 ? "Results" : ""}</h1>
         {results.map((books, index) => {
           return (
-            <Card
-              key={index}
-              src={books.volumeInfo.imageLinks.smallThumbnail}
-              alt={books.volumeInfo.title}
-              title={books.volumeInfo.title}
-              authors={!books.volumeInfo.authors ?
-                "No author available" : books.volumeInfo.authors}
-              description={!books.volumeInfo.description ?
-                "No description available" : books.volumeInfo.description}
-              link={books.volumeInfo.infoLink}
-              buttonvalue1="View"
-              buttonvalue2="Save"
-              buttonname2="save"
-              onClick={handleButtonClick}
-            />
+            <div key={index}>
+              <SuccessAlert
+                alertnumber={index}
+                title={books.volumeInfo.title}
+              />
+              <Card
+                src={books.volumeInfo.imageLinks.smallThumbnail}
+                alt={books.volumeInfo.title}
+                title={books.volumeInfo.title}
+                authors={!books.volumeInfo.authors ?
+                  "No author available" : books.volumeInfo.authors}
+                description={!books.volumeInfo.description ?
+                  "No description available" : books.volumeInfo.description}
+                link={books.volumeInfo.infoLink}
+                buttonvalue1="View"
+                buttonvalue2="Save"
+                buttonname2="save"
+                onClick={handleButtonClick}
+                alertnumber={index}
+              />
+            </div>
           )
         })}
       </Container>
