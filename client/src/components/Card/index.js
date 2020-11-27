@@ -3,7 +3,7 @@ import "./style.css";
 
 function Card(props) {
     return (
-        <div className="card mb-3" {...props}>
+        <div className="card mb-3">
             <div className="row no-gutters">
 
                 <div className="col-md-3">

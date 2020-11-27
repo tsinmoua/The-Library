@@ -79,12 +79,14 @@ function Search() {
           <Input onChange={handleInputChange} name="title" value={search} />
           <FormBtn onClick={handleFormSubmit}>
             Submit
-            </FormBtn>
+          </FormBtn>
         </form>
       </Container>
 
       <Container>
-        <h1>{results.length > 0 ? "Results" : ""}</h1>
+        <br/>
+        <br/>
+        <h1>{results.length > 0 ? "Results" : "Search for a book title to begin."}</h1>
         {results.map((books, index) => {
           return (
             <div key={index}>

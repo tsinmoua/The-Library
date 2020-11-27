@@ -81,6 +81,7 @@ function Saved() {
                 buttonvalue2="Delete"
                 buttonname2="delete"
                 id={books._id}
+                className="btn btn-danger"
                 onClick={handleButtonClick}
                 alertnumber={index}
               />
