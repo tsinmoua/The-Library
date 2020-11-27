@@ -5,7 +5,7 @@ import books from "../../assets/images/books.png"
 
 function NavBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
             <div className="navbar-brand">
                 <img src={books} width="30" height="30" className="d-inline-block align-top" alt="Books" loading="lazy" />
                     The Library

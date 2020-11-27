@@ -56,10 +56,7 @@ function Saved() {
     <>
       <Navbar />
 
-      <Jumbotron
-        heading="The Library Books Search"
-        heading2="Search for and Save Books of Interest"
-      />
+      <Jumbotron />
 
       <Container>
         <h1>Saved Books</h1>

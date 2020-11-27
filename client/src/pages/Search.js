@@ -49,28 +49,29 @@ function Search() {
 
     if (event.currentTarget.name === "save") {
       // console.log("clicked save");      
-      API.saveBook({ title, authors, description, image: src, link })
+      saveBook({ title, authors, description, image: src, link }, alertnumber);
+    }
+  }
+
+  function saveBook(object, index) {
+    API.saveBook(object)
       .then(res => {
-        $(`#success-alert${alertnumber}`).show()
-        $(`#success-alert${alertnumber}`)
+        // console.log(res)
+        $(`#success-alert${index}`).show()
+        $(`#success-alert${index}`)
           .fadeTo(3000, 500)
           .slideUp(500, function () {
-            $(`#success-alert${alertnumber}`).slideUp(500);
+            $(`#success-alert${index}`).slideUp(500);
           });
-        // console.log(res)
       })
       .catch(err => console.log(err));
-    }
   }
 
   return (
     <>
       <Navbar />
 
-      <Jumbotron
-        heading="The Library Books Search"
-        heading2="Search for and Save Books of Interest"
-      />
+      <Jumbotron />
 
       <Container>
         <h1>Book Search</h1>
